@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const Header = () => {
-    const [activeButton, setActiveButton] = useState(null);
+    const [activeButton, setActiveButton] = useState(0);
 
     const handleClick = (buttonIndex) => {
         setActiveButton(buttonIndex);
