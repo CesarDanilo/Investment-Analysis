@@ -1,6 +1,7 @@
 import './App.css'
 import Investments from './Views/Investments';
 import Bitcoin from './Views/Bitcoin';
+import Ethereum from './Views/Ethereum';
 
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Investments />} />
           <Route path="/bitcoin" element={<Bitcoin />} />
+          <Route path="/ethereum" element={<Ethereum />} />
         </Routes>
       </BrowserRouter>
     </div>
