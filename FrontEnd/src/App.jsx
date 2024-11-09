@@ -1,10 +1,19 @@
 import './App.css'
-import Header from './Componets/header'
+import Investments from './Views/Investments';
+import Bitcoin from './Views/Bitcoin';
+
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+
 
 function App() {
   return (
-    <div className="bg-gradient-to-b from-[#000000] to-[#222222] min-h-screen">
-      <Header />
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Investments />} />
+          <Route path="/bitcoin" element={<Bitcoin />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }
