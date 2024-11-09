@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [activeButton, setActiveButton] = useState(0);
@@ -6,7 +7,7 @@ const Header = () => {
     const handleClick = (buttonIndex) => {
         setActiveButton(buttonIndex);
     };
-    
+
     return (
         <>
             <div className="w-full h-32 flex justify-center items-end">
@@ -21,16 +22,18 @@ const Header = () => {
                     {/* Botões */}
                     <div className="w-4/6 h-10 mt-2 mr-2 rounded-lg flex justify-around">
                         {["Investments", "Bitcoin", "Ethereum"].map((label, index) => (
-                            <button
-                                key={index}
-                                onClick={() => handleClick(index)}
-                                className={`px-6 py-2 font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-opacity-50 ${activeButton === index
-                                    ? "bg-gradient-to-b  from-amber-600 to-orange-700 text-white focus:ring-amber-600"
-                                    : " text-gray-400 focus:ring-amber-600"
-                                    }`}
-                            >
-                                {label}
-                            </button>
+                            <Link to={`/${label.toLowerCase()}`}>
+                                <button
+                                    key={index}
+                                    onClick={() => handleClick(index)}
+                                    className={`px-6 py-2 font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-opacity-50 ${activeButton === index
+                                        ? "bg-gradient-to-b  from-amber-600 to-orange-700 text-white focus:ring-amber-600"
+                                        : " text-gray-400 focus:ring-amber-600"
+                                        }`}
+                                >
+                                    {label}
+                                </button>
+                            </Link>
                         ))}
                     </div>
                 </div>

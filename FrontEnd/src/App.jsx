@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Investments />} />
+          <Route path="/investments" element={<Investments />} />
           <Route path="/bitcoin" element={<Bitcoin />} />
           <Route path="/ethereum" element={<Ethereum />} />
         </Routes>
