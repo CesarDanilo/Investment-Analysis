@@ -1,8 +1,19 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
+    const location = useLocation();
     const [activeButton, setActiveButton] = useState(0);
+
+    const labels = ["Investments", "Bitcoin", "Ethereum"];
+
+    useEffect(() => {
+        // Define o botão ativo com base na URL atual
+        const currentIndex = labels.findIndex(
+            (label) => `/${label.toLowerCase()}` === location.pathname
+        );
+        setActiveButton(currentIndex);
+    }, [location.pathname]);
 
     const handleClick = (buttonIndex) => {
         setActiveButton(buttonIndex);
@@ -21,14 +32,13 @@ const Header = () => {
 
                     {/* Botões */}
                     <div className="w-4/6 h-10 mt-2 mr-2 rounded-lg flex justify-around">
-                        {["Investments", "Bitcoin", "Ethereum"].map((label, index) => (
-                            <Link to={`/${label.toLowerCase()}`}>
+                        {labels.map((label, index) => (
+                            <Link key={index} to={`/${label.toLowerCase()}`}>
                                 <button
-                                    key={index}
                                     onClick={() => handleClick(index)}
                                     className={`px-6 py-2 font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-opacity-50 ${activeButton === index
-                                        ? "bg-gradient-to-b  from-amber-600 to-orange-700 text-white focus:ring-amber-600"
-                                        : " text-gray-400 focus:ring-amber-600"
+                                            ? "bg-gradient-to-b from-amber-600 to-orange-700 text-white focus:ring-amber-600"
+                                            : "text-gray-400 focus:ring-amber-600"
                                         }`}
                                 >
                                     {label}
@@ -36,9 +46,11 @@ const Header = () => {
                             </Link>
                         ))}
                     </div>
+
                 </div>
             </div>
         </>
-    )
+    );
 }
+
 export default Header;
