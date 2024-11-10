@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ApexChart from "./graphic";
 
 const ValuesSlideBar = () => {
     const [labelValueMoney, setLabelValueMoney] = useState(0);
@@ -42,8 +43,8 @@ const ValuesSlideBar = () => {
                 />
             </div>
             {/* grafico */}
-            <div className="flex flex-col w-[580px] h-[400px] items-center justify-center space-y-4 bg-[#0D0D0D] rounded-xl p-6">
-                
+            <div className="flex w-[580px] h-[400px] items-center justify-center space-y-4 bg-[#0D0D0D] rounded-xl">
+                <ApexChart />
             </div>
         </div>
     );
