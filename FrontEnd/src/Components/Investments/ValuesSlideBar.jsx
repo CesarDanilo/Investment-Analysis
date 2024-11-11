@@ -5,6 +5,15 @@ const ValuesSlideBar = () => {
     const [labelValueMoney, setLabelValueMoney] = useState(0);
     const [labelValueMonth, setLabelValueMonth] = useState(1);
 
+
+    const calculateSavingsInvestment = () => {
+        try {
+            
+        } catch (error) {
+            console.log("não foi possivel fazer o calculo.[erro]: ", error)
+        }
+    }
+
     return (
         <div className="flex justify-center items-center gap-10">
             {/* componente que pega os valores e coloca em um state para ser comsumido pelo grafico */}
