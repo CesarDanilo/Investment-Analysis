@@ -5,50 +5,55 @@ class ApexChart extends Component {
     constructor(props) {
         super(props);
 
-        // Definindo as cores a serem utilizadas
-        const colors = ['#777777', '#F29A2E'];
+        const cores = ['#777777', '#F29A2E'];
 
         this.state = {
-            series: [{
-                data: [21, 22] // Dados para o gráfico
-            }],
+            series: [
+                { data: [props.calculatedValueSavings, props.calculatedValueSavings] }, // Passando o valor calculado para o gráfico
+            ],
             options: {
                 chart: {
                     height: 350,
                     type: 'bar',
                     events: {
                         click: function (chart, w, e) {
-                            // código para eventos ao clicar, se necessário
-                        }
-                    }
+                            // Aqui você pode adicionar eventos de clique, se necessário
+                        },
+                    },
                 },
-                colors: colors, // Usando as cores definidas
+                colors: cores,
                 plotOptions: {
                     bar: {
                         columnWidth: '85%',
-                        distributed: true, // Distribuir as cores
-                    }
+                        distributed: true,
+                    },
                 },
                 dataLabels: {
-                    enabled: false // Desabilitando os rótulos de dados
+                    enabled: false, // Desabilitando os rótulos de dados
                 },
                 legend: {
-                    show: false // Desabilitando a legenda
+                    show: false, // Desabilitando a legenda
                 },
                 xaxis: {
-                    categories: [
-                        ['POUPANÇA'],
-                        ['TESOURO DIRETO']
-                    ], // Definindo as categorias do eixo X
+                    categories: ['POUPANÇA', 'TESOURO DIRETO'], // Categorias no eixo X
                     labels: {
                         style: {
-                            colors: colors, // Definindo as cores dos rótulos do eixo X
-                            fontSize: '12px'
-                        }
-                    }
-                }
-            }
+                            colors: cores,
+                            fontSize: '12px',
+                        },
+                    },
+                },
+            },
         };
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.calculatedValueSavings !== this.props.calculatedValueSavings) {
+            // Atualiza a série do gráfico quando o valor calculado mudar
+            this.setState({
+                series: [{ data: [(this.props.calculatedValueSavings + this.props.labelValueMoney), 22] }],
+            });
+        }
     }
 
     render() {
