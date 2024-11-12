@@ -9,7 +9,7 @@ class ApexChart extends Component {
 
         this.state = {
             series: [
-                { data: [props.calculatedValueSavings, props.calculatedValueSavings] }, // Passando o valor calculado para o gráfico
+                { data: [props.calculatedValueSavings, props.calculatedValueSavingsTesouroDireto] }, // Passando o valor calculado para o gráfico
             ],
             options: {
                 chart: {
