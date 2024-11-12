@@ -4,16 +4,16 @@ import ApexChart from "./graphic";
 const ValuesSlideBar = () => {
     const [labelValueMoney, setLabelValueMoney] = useState(0);
     const [labelValueMonth, setLabelValueMonth] = useState(1);
-    const referentialTax = 0.005;
-    const referentialTaxTesouroDireto = 13.75;
+    const referentialTax = 0.005; // Taxa da poupança
+    const referentialTaxTesouroDireto = 13.75; // Taxa anual do Tesouro Direto
 
     const [calculatedValueSavings, setCalculatedValueSavings] = useState(0);
     const [calculatedValueSavingsTesouroDireto, setCalculatedValueSavingsTesouroDireto] = useState(0);
 
     const calculateSavingsInvestment = () => {
         try {
-            // Corrigido a lógica para calcular o valor do investimento
-            setCalculatedValueSavings(labelValueMoney * referentialTax * labelValueMonth);
+            // Poupança tem juros simples
+            setCalculatedValueSavings(labelValueMoney * (1 + referentialTax * labelValueMonth));
         } catch (error) {
             console.log("Não foi possível fazer o cálculo. [erro]: ", error);
         }
@@ -22,8 +22,8 @@ const ValuesSlideBar = () => {
     const calculateSavingsInvestmentTesouroDireto = () => {
         try {
             // Calculando a taxa mensal a partir da taxa anual
-            let valorMensalTaxa = referentialTaxTesouroDireto / 12 / 100; // Dividimos por 12 e convertemos para decimal
-            valorMensalTaxa = valorMensalTaxa + 1; // Adicionamos 1 para o fator de multiplicação (1 + taxa mensal)
+            let valorMensalTaxa = referentialTaxTesouroDireto / 12 / 100; // Convertendo para decimal mensal
+            valorMensalTaxa = valorMensalTaxa + 1; // Fator de multiplicação para a taxa mensal
 
             // Calculando o valor com juros compostos para o número de meses
             let valorComJuros = labelValueMoney * Math.pow(valorMensalTaxa, labelValueMonth);
@@ -31,8 +31,13 @@ const ValuesSlideBar = () => {
             // Calculando o lucro obtido
             let lucro = valorComJuros - labelValueMoney;
 
-            // Imposto de Renda: 22,5% para até 6 meses de investimento
-            let imposto = lucro * 22.5 / 100;
+            // Imposto de Renda: aplica 22,5% se for até 6 meses, 20% se for entre 6 e 12 meses, etc.
+            let imposto = 0;
+            if (labelValueMonth <= 6) {
+                imposto = lucro * 22.5 / 100;
+            } else {
+                imposto = lucro * 20 / 100; // Supondo 20% para investimentos entre 6 e 12 meses
+            }
 
             // Valor final após o imposto de renda
             let valorFinal = valorComJuros - imposto;

@@ -9,7 +9,12 @@ class ApexChart extends Component {
 
         this.state = {
             series: [
-                { data: [props.calculatedValueSavings, props.calculatedValueSavingsTesouroDireto] }, // Passando o valor calculado para o gráfico
+                {
+                    data: [
+                        this.formatCurrency(props.calculatedValueSavings),
+                        this.formatCurrency(props.calculatedValueSavingsTesouroDireto)
+                    ]
+                }
             ],
             options: {
                 chart: {
@@ -17,7 +22,7 @@ class ApexChart extends Component {
                     type: 'bar',
                     events: {
                         click: function (chart, w, e) {
-                            // Aqui você pode adicionar eventos de clique, se necessário
+                            // Adicionar eventos de clique aqui, se necessário
                         },
                     },
                 },
@@ -29,13 +34,16 @@ class ApexChart extends Component {
                     },
                 },
                 dataLabels: {
-                    enabled: false, // Desabilitando os rótulos de dados
+                    enabled: true, // Habilitando os rótulos de dados
+                    formatter: function (val) {
+                        return `R$ ${val}`;
+                    }
                 },
                 legend: {
                     show: false, // Desabilitando a legenda
                 },
                 xaxis: {
-                    categories: ['POUPANÇA', 'TESOURO DIRETO'], // Categorias no eixo X
+                    categories: ['POUPANÇA', 'TESOURO DIRETO'],
                     labels: {
                         style: {
                             colors: cores,
@@ -47,11 +55,26 @@ class ApexChart extends Component {
         };
     }
 
+    // Função para formatar valores em R$ com 2 casas decimais
+    formatCurrency(value) {
+        return parseFloat(value).toFixed(2); // Formatando com 2 casas decimais
+    }
+
+    // Atualiza os dados do gráfico quando os props de valores calculados mudarem
     componentDidUpdate(prevProps) {
-        if (prevProps.calculatedValueSavings !== this.props.calculatedValueSavings) {
-            // Atualiza a série do gráfico quando o valor calculado mudar
+        if (
+            prevProps.calculatedValueSavings !== this.props.calculatedValueSavings ||
+            prevProps.calculatedValueSavingsTesouroDireto !== this.props.calculatedValueSavingsTesouroDireto
+        ) {
             this.setState({
-                series: [{ data: [(this.props.calculatedValueSavings + this.props.labelValueMoney), 22] }],
+                series: [
+                    {
+                        data: [
+                            this.formatCurrency(this.props.calculatedValueSavings),
+                            this.formatCurrency(this.props.calculatedValueSavingsTesouroDireto)
+                        ]
+                    },
+                ],
             });
         }
     }
