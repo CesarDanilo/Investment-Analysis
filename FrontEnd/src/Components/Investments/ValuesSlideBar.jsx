@@ -56,10 +56,10 @@ const ValuesSlideBar = () => {
     }, [labelValueMoney, labelValueMonth]);
 
     return (
-        <div className="flex justify-center items-center gap-10">
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-6 px-4 sm:px-6 md:px-8">
             {/* Componente para pegar os valores e colocá-los em um estado */}
-            <div className="flex flex-col w-[580px] h-[400px] items-center justify-center space-y-4 bg-[#0D0D0D] rounded-xl p-6">
-                <h3 className="text-[#B6B6B6] text-xl">Eu tenho R${labelValueMoney}</h3>
+            <div className="flex flex-col w-full sm:w-[450px] md:w-[500px] lg:w-[500px] h-auto sm:h-[350px] items-center justify-center space-y-4 bg-[#0D0D0D] rounded-xl p-5">
+                <h3 className="text-[#B6B6B6] text-lg">Eu tenho R${labelValueMoney}</h3>
                 <input
                     type="range"
                     min="0"
@@ -69,7 +69,7 @@ const ValuesSlideBar = () => {
                     onChange={(e) => setLabelValueMoney(Number(e.target.value))}
                     className="w-[90%] h-1 bg-[#B6B6B6] rounded-full appearance-none outline-none accent-[#B6B6B6] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-amber-600"
                 />
-                <h3 className="text-[#B6B6B6] text-xl">
+                <h3 className="text-[#B6B6B6] text-lg">
                     Aplicar durante {labelValueMonth} {labelValueMonth > 1 ? "meses" : "mês"}
                 </h3>
                 <input
@@ -84,7 +84,7 @@ const ValuesSlideBar = () => {
             </div>
 
             {/* Gráfico com o valor calculado */}
-            <div className="flex w-[580px] h-[400px] items-center justify-center space-y-4 bg-[#0D0D0D] rounded-xl">
+            <div className="flex w-full sm:w-[450px] md:w-[500px] lg:w-[500px] h-auto sm:h-[350px] items-center justify-center space-y-4 bg-[#0D0D0D] rounded-xl">
                 <ApexChart
                     calculatedValueSavings={calculatedValueSavings}
                     labelValueMoney={labelValueMoney}
@@ -92,6 +92,8 @@ const ValuesSlideBar = () => {
                 />
             </div>
         </div>
+
+
     );
 };
 
