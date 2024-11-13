@@ -1,74 +1,64 @@
 import { useEffect, useState } from "react";
 import ApexChart from "./graphic";
+import { useInvestment } from "../../Context/InvestmentsContext";
 
 const ValuesSlideBar = () => {
-    const [labelValueMoney, setLabelValueMoney] = useState(0);
-    const [labelValueMonth, setLabelValueMonth] = useState(1);
+    const { labelValueMoney, setLabelValueMoney, labelValueMonth, setLabelValueMonth } = useInvestment();
+
     const referentialTax = 0.005; // Taxa da poupança
     const referentialTaxTesouroDireto = 13.75; // Taxa anual do Tesouro Direto
 
     const [calculatedValueSavings, setCalculatedValueSavings] = useState(0);
     const [calculatedValueSavingsTesouroDireto, setCalculatedValueSavingsTesouroDireto] = useState(0);
 
+    // Função de cálculo da poupança
     const calculateSavingsInvestment = () => {
         try {
-            // Poupança tem juros simples
             setCalculatedValueSavings(labelValueMoney * (1 + referentialTax * labelValueMonth));
         } catch (error) {
             console.log("Não foi possível fazer o cálculo. [erro]: ", error);
         }
     };
 
+    // Função de cálculo do Tesouro Direto
     const calculateSavingsInvestmentTesouroDireto = () => {
         try {
-            // Calculando a taxa mensal a partir da taxa anual
-            let valorMensalTaxa = referentialTaxTesouroDireto / 12 / 100; // Convertendo para decimal mensal
-            valorMensalTaxa = valorMensalTaxa + 1; // Fator de multiplicação para a taxa mensal
+            let valorMensalTaxa = referentialTaxTesouroDireto / 12 / 100;
+            valorMensalTaxa = valorMensalTaxa + 1;
 
-            // Calculando o valor com juros compostos para o número de meses
             let valorComJuros = labelValueMoney * Math.pow(valorMensalTaxa, labelValueMonth);
-
-            // Calculando o lucro obtido
             let lucro = valorComJuros - labelValueMoney;
 
-            // Imposto de Renda: aplica 22,5% se for até 6 meses, 20% se for entre 6 e 12 meses, etc.
             let imposto = 0;
             if (labelValueMonth <= 6) {
                 imposto = lucro * 22.5 / 100;
             } else {
-                imposto = lucro * 20 / 100; // Supondo 20% para investimentos entre 6 e 12 meses
+                imposto = lucro * 20 / 100; // Ajustar se necessário para mais faixas
             }
 
-            // Valor final após o imposto de renda
             let valorFinal = valorComJuros - imposto;
 
-            // Atualizando o estado com o valor final
             setCalculatedValueSavingsTesouroDireto(valorFinal);
         } catch (error) {
             console.log("Não foi possível fazer o cálculo. [erro]: ", error);
         }
     };
 
-    const calulateInvestmentCDB = () => {
-        // vou precisar saber como funciona o CDB para começar a fazer a função
-        try {
-
-        } catch (error) {
-
-        }
-    }
-
-    // Atualiza o valor do cálculo quando `labelValueMoney` ou `labelValueMonth` muda
+    // Atualiza o cálculo sempre que o valor do dinheiro ou meses muda
     useEffect(() => {
         calculateSavingsInvestment();
         calculateSavingsInvestmentTesouroDireto();
     }, [labelValueMoney, labelValueMonth]);
 
+    // Função para formatar o valor em formato monetário
+    const formatCurrency = (value) => {
+        return `R$ ${value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    };
+
     return (
         <div className="flex flex-col lg:flex-row justify-center items-center gap-6 px-4 sm:px-6 md:px-8">
-            {/* Componente para pegar os valores e colocá-los em um estado */}
             <div className="flex flex-col w-full sm:w-[450px] md:w-[500px] lg:w-[500px] h-auto sm:h-[350px] items-center justify-center space-y-4 bg-[#0D0D0D] rounded-xl p-5">
-                <h3 className="text-[#B6B6B6] text-lg">Eu tenho R${labelValueMoney}</h3>
+                <h3 className="text-[#B6B6B6] text-lg">Eu tenho {formatCurrency(labelValueMoney)}</h3>
                 <input
                     type="range"
                     min="0"
@@ -101,8 +91,6 @@ const ValuesSlideBar = () => {
                 />
             </div>
         </div>
-
-
     );
 };
 

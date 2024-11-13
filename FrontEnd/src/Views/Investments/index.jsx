@@ -1,6 +1,7 @@
 import Header from '../../Components/Header';
 import ValuesSlideBar from '../../Components/Investments/ValuesSlideBar';
 import TableOtherInvestiments from '../../Components/Investments/TableOtherInvestiments';
+import { InvestmentsProvider } from '../../Context/InvestmentsContext';
 
 const Investments = () => {
     return (
@@ -8,8 +9,10 @@ const Investments = () => {
             <Header className="fixed top-0 left-0 w-full" />
             <div className="flex flex-col justify-center items-center flex-grow mt-20">
                 <div className="flex flex-col gap-14 w-3/4">
-                    <ValuesSlideBar />
-                    <TableOtherInvestiments />
+                    <InvestmentsProvider>
+                        <ValuesSlideBar />
+                        <TableOtherInvestiments />
+                    </InvestmentsProvider>
                 </div>
             </div>
         </div>
