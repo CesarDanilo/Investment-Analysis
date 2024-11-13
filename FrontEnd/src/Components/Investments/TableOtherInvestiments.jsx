@@ -5,8 +5,8 @@ const TableOtherInvestiments = () => {
             <thead className="rounded-lg">
                 <tr className="bg-[#000000]/20 rounded-lg">
                     <th className="px-4 py-2 font-semibold text-amber-600">Tipos de Investimentos</th>
-                    <th className="px-4 py-2 font-semibold text-amber-600">Artist</th>
-                    <th className="px-4 py-2 font-semibold text-amber-600">Year</th>
+                    <th className="px-4 py-2 font-semibold text-amber-600">Poupança</th>
+                    <th className="px-4 py-2 font-semibold text-amber-600">Investimento</th>
                 </tr>
             </thead>
             <tbody className="rounded-lg">
