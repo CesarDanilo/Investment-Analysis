@@ -49,6 +49,10 @@ const ValuesSlideBar = () => {
         }
     };
 
+    const calulateInvestmentCDB = () => {
+        
+    }
+
     // Atualiza o valor do cálculo quando `labelValueMoney` ou `labelValueMonth` muda
     useEffect(() => {
         calculateSavingsInvestment();
