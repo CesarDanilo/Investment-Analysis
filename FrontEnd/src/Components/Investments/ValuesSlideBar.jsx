@@ -50,7 +50,12 @@ const ValuesSlideBar = () => {
     };
 
     const calulateInvestmentCDB = () => {
-        
+        // vou precisar saber como funciona o CDB para começar a fazer a função
+        try {
+
+        } catch (error) {
+
+        }
     }
 
     // Atualiza o valor do cálculo quando `labelValueMoney` ou `labelValueMonth` muda
