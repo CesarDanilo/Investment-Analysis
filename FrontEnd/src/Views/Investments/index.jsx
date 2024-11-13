@@ -13,8 +13,6 @@ const Investments = () => {
                 </div>
             </div>
         </div>
-
-
     );
 }
 

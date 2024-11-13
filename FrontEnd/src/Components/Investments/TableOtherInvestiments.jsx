@@ -1,6 +1,5 @@
 const TableOtherInvestiments = () => {
     return (
-
         <table className="table-auto bg-[#000000]/30 backdrop-blur-md  shadow-lg text-gray-200 w-full text-left rounded-lg">
             <thead className="rounded-lg">
                 <tr className="bg-[#000000]/20 rounded-lg">
