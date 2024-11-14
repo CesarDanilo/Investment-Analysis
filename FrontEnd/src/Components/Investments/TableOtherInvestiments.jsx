@@ -69,12 +69,12 @@ const TableOtherInvestiments = () => {
             <tbody className="rounded-lg">
                 <tr className="hover:bg-[#000000]/20 transition-colors rounded-lg">
                     <td className="px-4 py-2">CDB (Certificado de Depósito Bancário)</td>
-                    <td className="px-4 py-2">R${calculatedValueSavings}</td>
+                    <td className="px-4 py-2">R${calculatedValueSavings.toFixed(2)}</td>
                     <td className="px-4 py-2">R${calculatedValueCDB.toFixed(2)}</td>
                 </tr>
                 <tr className="hover:bg-[#000000]/20 transition-colors rounded-lg">
                     <td className="px-4 py-2 ">LCI (Letra de Crédito Imobiliário)</td>
-                    <td className="px-4 py-2 ">R${calculatedValueSavings}</td>
+                    <td className="px-4 py-2 ">R${calculatedValueSavings.toFixed(2)}</td>
                     <td className="px-4 py-2 ">R${calculatedValueLCI.toFixed(2)}</td>
                 </tr>
                 <tr className="hover:bg-[#000000]/20 transition-colors rounded-lg">
