@@ -18,7 +18,6 @@ const TableOtherInvestiments = () => {
         }
     };
 
-
     const calculateValueCDBInvestments = () => {
         try {
             const taxPerMonth = (referentialTaxCDB / 100) / 12;
