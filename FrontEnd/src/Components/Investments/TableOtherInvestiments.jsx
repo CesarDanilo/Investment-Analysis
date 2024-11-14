@@ -7,15 +7,17 @@ const TableOtherInvestiments = () => {
     const [calculatedValueSavings, setCalculatedValueSavings] = useState(0);
     const [calculatedValueLCI, setCalculatedValueLCI] = useState(0); // Novo estado para LCI
     const referentialTaxCDB = 10;
-    const referentialTaxLCI = 0.09; // Suponha uma taxa de 9% ao ano para o LCI
+    const referentialTaxLCI = 0.09;  // Suponha uma taxa de 9% ao ano para o LCI
+    const referentialTax = 0.005; 
 
     const calculateSavingsInvestment = () => {
         try {
-            setCalculatedValueSavings(labelValueMoney * (1 + referentialTaxCDB * labelValueMonth));
+            setCalculatedValueSavings(labelValueMoney * (1 + referentialTax * labelValueMonth));
         } catch (error) {
             console.log("Não foi possível fazer o cálculo. [erro]: ", error);
         }
     };
+
 
     const calculateValueCDBInvestments = () => {
         try {
