@@ -48,6 +48,10 @@ const TableOtherInvestiments = () => {
         }
     }
 
+    const calculateValueLCIInvestments = () => {
+
+    }
+
     useEffect(() => {
         calculateSavingsInvestment();
         calculateValueCDBInvestments();
