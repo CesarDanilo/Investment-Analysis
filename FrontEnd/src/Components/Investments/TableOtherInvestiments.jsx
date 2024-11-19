@@ -5,11 +5,14 @@ const TableOtherInvestiments = () => {
     const { labelValueMoney, setLabelValueMoney, labelValueMonth, setLabelValueMonth } = useInvestment();
     const [calculatedValueCDB, setCalculatedValueCDB] = useState(0);
     const [calculatedValueSavings, setCalculatedValueSavings] = useState(0);
-    const [calculatedValueLCI, setCalculatedValueLCI] = useState(0); // Novo estado para LCI
-    const referentialTaxCDB = 10;
-    const referentialTaxLCI = 0.09;  // Suponha uma taxa de 9% ao ano para o LCI
-    const referentialTax = 0.005; 
+    const [calculatedValueLCI, setCalculatedValueLCI] = useState(0);
+    const [calculatedValueCRI, setCalculatedValueCRI] = useState(0); // Novo estado para CRI
+    const referentialTaxCDB = 10;  // Taxa do CDB
+    const referentialTaxLCI = 0.09;  // Taxa do LCI (9% ao ano)
+    const referentialTaxCRI = 0.12; // Taxa do CRI (12% ao ano)
+    const referentialTax = 0.005; // Taxa da Poupança
 
+    // Cálculo do investimento em Poupança
     const calculateSavingsInvestment = () => {
         try {
             setCalculatedValueSavings(labelValueMoney * (1 + referentialTax * labelValueMonth));
@@ -18,6 +21,7 @@ const TableOtherInvestiments = () => {
         }
     };
 
+    // Cálculo do investimento em CDB
     const calculateValueCDBInvestments = () => {
         try {
             const taxPerMonth = (referentialTaxCDB / 100) / 12;
@@ -42,6 +46,7 @@ const TableOtherInvestiments = () => {
         }
     };
 
+    // Cálculo do investimento em LCI
     const calculateValueLCIInvestments = () => {
         try {
             const taxPerMonthLCI = (referentialTaxLCI / 12);
@@ -52,10 +57,23 @@ const TableOtherInvestiments = () => {
         }
     };
 
+    // Cálculo do investimento em CRI
+    const calculateValueCRIInvestments = () => {
+        try {
+            const taxPerMonthCRI = (referentialTaxCRI / 12);
+            const valorFinalCRI = labelValueMoney * Math.pow(1 + taxPerMonthCRI, labelValueMonth);
+            setCalculatedValueCRI(valorFinalCRI);
+        } catch (error) {
+            console.log("Erro ao calcular o valor do CRI. [Erro]: ", error);
+        }
+    };
+
+    // Executa os cálculos sempre que o valor ou mês mudarem
     useEffect(() => {
         calculateSavingsInvestment();
         calculateValueCDBInvestments();
-        calculateValueLCIInvestments(); // Chamando o cálculo do LCI
+        calculateValueLCIInvestments();
+        calculateValueCRIInvestments(); // Chamando o cálculo do CRI
     }, [labelValueMoney, labelValueMonth]);
 
     return (
@@ -74,14 +92,14 @@ const TableOtherInvestiments = () => {
                     <td className="px-4 py-2">R${calculatedValueCDB.toFixed(2)}</td>
                 </tr>
                 <tr className="hover:bg-[#000000]/20 transition-colors rounded-lg">
-                    <td className="px-4 py-2 ">LCI (Letra de Crédito Imobiliário)</td>
-                    <td className="px-4 py-2 ">R${calculatedValueSavings.toFixed(2)}</td>
-                    <td className="px-4 py-2 ">R${calculatedValueLCI.toFixed(2)}</td>
+                    <td className="px-4 py-2">LCI (Letra de Crédito Imobiliário)</td>
+                    <td className="px-4 py-2">R${calculatedValueSavings.toFixed(2)}</td>
+                    <td className="px-4 py-2">R${calculatedValueLCI.toFixed(2)}</td>
                 </tr>
                 <tr className="hover:bg-[#000000]/20 transition-colors rounded-lg">
-                    <td className="px-4 py-2 ">CRI (Certificado de Recebíveis Imobiliários)</td>
-                    <td className="px-4 py-2 ">R$00.000</td>
-                    <td className="px-4 py-2 ">R$00.000</td>
+                    <td className="px-4 py-2">CRI (Certificado de Recebíveis Imobiliários)</td>
+                    <td className="px-4 py-2">R${calculatedValueSavings.toFixed(2)}</td>
+                    <td className="px-4 py-2">R${calculatedValueCRI.toFixed(2)}</td>
                 </tr>
             </tbody>
         </table>
