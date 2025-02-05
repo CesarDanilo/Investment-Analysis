@@ -11,8 +11,8 @@ const Bitcoin = () => {
         <>
             <div className="bg-gradient-to-b from-[#000000] to-[#222222] min-h-screen flex flex-col itens justify-center items-center">
                 <Header className="fixed top-0 left-0 w-full" />
-                <div className='mt-44 flex-col justify-center items-center flex-grow'>
-                    <div className='w-52 h-full'>
+                <div className='mt-20 flex-col justify-center items-center flex-grow'>
+                    <div className='w-48 h-full'>
                         <img src={bit} alt="" />
                     </div>
                     <BitcoinCount />
