@@ -1,7 +1,7 @@
 import Header from '../../Components/Header'
 import bit from '../../../public/bit.png'
 import MainBtc from '../../Components/Bitcoin/main'
-
+import BitcoinCount from '../../Components/Bitcoin/bitcoinCount'
 const Bitcoin = () => {
 
     // Link de api que traz o valor do bitcoin atual em dolar
@@ -15,9 +15,7 @@ const Bitcoin = () => {
                     <div className='w-52 h-full'>
                         <img src={bit} alt="" />
                     </div>
-                    <div>
-                        <h1 className='text-green-500 text-3xl'>$101,778.79 USD </h1>
-                    </div>
+                    <BitcoinCount />
                 </div>
                 <MainBtc />
             </div>
