@@ -2,7 +2,7 @@
 
 ## Descrição do Projeto: Análise de Investimentos
 
-Este projeto tem como objetivo analisar e comparar diferentes opções de investimento disponíveis no mercado financeiro, com foco em aplicações de um capital inicial ao longo de um período determinado. As opções de investimento consideradas incluem Bitcoin, Ethereum, CIR (Certificado de Depósito Bancário), LCI (Letra de Crédito Imobiliário), CRI (Certificado de Recebíveis Imobiliários), Tesouro Direto e Poupança.
+Este projeto tem como objetivo analisar e comparar diferentes opções de investimento disponíveis no mercado financeiro, com foco em aplicações de um capital inicial ao longo de um período determinado. As opções de investimento consideradas incluem **Bitcoin**, **Ethereum**, **CIR (Certificado de Depósito Bancário)**, **LCI (Letra de Crédito Imobiliário)**, **CRI (Certificado de Recebíveis Imobiliários)**, **Tesouro Direto** e **Poupança**.
 
 O projeto visa avaliar o desempenho de cada tipo de investimento, considerando fatores como rentabilidade, liquidez e risco. Através de uma análise detalhada, o projeto busca fornecer insights sobre qual opção de investimento pode ser mais adequada para diferentes perfis de investidores, especialmente aqueles que estão começando a investir com um capital inicial modesto.
 
@@ -39,11 +39,9 @@ O projeto foi desenvolvido com uma arquitetura componentizada, onde cada parte d
    ```bash
    git clone https://github.com/seu-usuario/investment-simulator.git
 
-
 2. Instale as dependências:
    ```bash
    npm install
-
 
 3. Execute o projeto em modo de desenvolvimento:
    ```bash
