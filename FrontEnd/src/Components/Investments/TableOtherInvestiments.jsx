@@ -2,20 +2,20 @@ import { useInvestment } from "../../Context/InvestmentsContext";
 import { useState, useEffect } from 'react';
 
 const TableOtherInvestiments = () => {
-  const {
-    labelValueMoney,
-    labelValueMonth
-  } = useInvestment();
+  const { labelValueMoney, labelValueMonth } = useInvestment();
 
   const [calculatedValueCDB, setCalculatedValueCDB] = useState(0);
   const [calculatedValueSavings, setCalculatedValueSavings] = useState(0);
   const [calculatedValueLCI, setCalculatedValueLCI] = useState(0);
   const [calculatedValueCRI, setCalculatedValueCRI] = useState(0);
 
-  const referentialTaxCDB = 10 / 100;
-  const referentialTaxLCI = 0.09;
-  const referentialTaxCRI = 0.12;
-  const referentialTax = 0.005;
+  const referentialTaxCDB = 0.10; // 10% ao ano
+  const referentialTaxLCI = 0.09; // 9% ao ano
+  const referentialTaxCRI = 0.12; // 12% ao ano
+  const referentialTax = 0.005;   // Poupança mensal simples
+
+  const formatCurrency = (value) =>
+    value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
   const calculateSavingsInvestment = () => {
     try {
@@ -71,30 +71,30 @@ const TableOtherInvestiments = () => {
   }, [labelValueMoney, labelValueMonth]);
 
   return (
-    <div className="w-full bg-[#111] rounded-lg p-4">
-      <table className="w-full text-gray-300">
+    <div className="w-full bg-[#111111] rounded-lg p-4 shadow-md">
+      <table className="w-full text-gray-300 text-sm">
         <thead>
-          <tr className="text-amber-500 text-sm uppercase tracking-wide">
+          <tr className="text-amber-500 uppercase tracking-wide border-b border-amber-600">
             <th className="py-2 text-left">Investimento</th>
-            <th className="py-2 text-left">Poupança</th>
-            <th className="py-2 text-left">Valor Final</th>
+            <th className="py-2 text-right">Poupança</th>
+            <th className="py-2 text-right">Valor Final</th>
           </tr>
         </thead>
         <tbody>
-          <tr className="hover:bg-[#222] transition">
-            <td className="py-2">CDB (Certificado de Depósito Bancário)</td>
-            <td className="py-2">R$ {calculatedValueSavings.toFixed(2)}</td>
-            <td className="py-2">R$ {calculatedValueCDB.toFixed(2)}</td>
+          <tr className="hover:bg-[#222222] transition">
+            <td className="py-2 max-w-[250px] pr-2">CDB (Certificado de Depósito Bancário)</td>
+            <td className="py-2 text-right">{formatCurrency(calculatedValueSavings)}</td>
+            <td className="py-2 text-right">{formatCurrency(calculatedValueCDB)}</td>
           </tr>
-          <tr className="hover:bg-[#222] transition">
-            <td className="py-2">LCI (Letra de Crédito Imobiliário)</td>
-            <td className="py-2">R$ {calculatedValueSavings.toFixed(2)}</td>
-            <td className="py-2">R$ {calculatedValueLCI.toFixed(2)}</td>
+          <tr className="hover:bg-[#222222] transition">
+            <td className="py-2 max-w-[250px] pr-2">LCI (Letra de Crédito Imobiliário)</td>
+            <td className="py-2 text-right">{formatCurrency(calculatedValueSavings)}</td>
+            <td className="py-2 text-right">{formatCurrency(calculatedValueLCI)}</td>
           </tr>
-          <tr className="hover:bg-[#222] transition">
-            <td className="py-2">CRI (Certificado de Recebíveis Imobiliários)</td>
-            <td className="py-2">R$ {calculatedValueSavings.toFixed(2)}</td>
-            <td className="py-2">R$ {calculatedValueCRI.toFixed(2)}</td>
+          <tr className="hover:bg-[#222222] transition">
+            <td className="py-2 max-w-[250px] pr-2">CRI (Certificado de Recebíveis Imobiliários)</td>
+            <td className="py-2 text-right">{formatCurrency(calculatedValueSavings)}</td>
+            <td className="py-2 text-right">{formatCurrency(calculatedValueCRI)}</td>
           </tr>
         </tbody>
       </table>

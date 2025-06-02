@@ -18,7 +18,7 @@ class ApexChart extends Component {
             ],
             options: {
                 chart: {
-                    height: 350,
+                    height: 200, // menor altura
                     type: 'bar',
                     toolbar: { show: false },
                     background: 'transparent'
@@ -26,31 +26,33 @@ class ApexChart extends Component {
                 colors: cores,
                 plotOptions: {
                     bar: {
-                        borderRadius: 4,
-                        columnWidth: '50%',
+                        borderRadius: 6,   // um pouco mais arredondado
+                        columnWidth: '30%', // barras mais finas
                         distributed: true
                     }
                 },
                 dataLabels: {
                     enabled: true,
                     style: {
-                        colors: ['#e0e0e0']
+                        colors: ['#e0e0e0'],
+                        fontSize: '12px', // fonte menor para os valores
+                        fontWeight: '600',
                     },
                     formatter: (val) => `R$ ${val}`
                 },
                 xaxis: {
                     categories: ['POUPANÇA', 'TESOURO DIRETO'],
                     labels: {
-                        show: false // Remove rótulos do eixo x
+                        show: false // mantém oculto para simplicidade
                     },
                     axisBorder: { show: false },
                     axisTicks: { show: false }
                 },
                 yaxis: {
-                    show: false // Remove eixo y completamente
+                    show: false // remove eixo y para limpeza
                 },
                 grid: {
-                    show: false // Remove linhas de grade
+                    show: false // remove linhas de grade
                 },
                 tooltip: {
                     theme: 'dark'
@@ -86,12 +88,12 @@ class ApexChart extends Component {
 
     render() {
         return (
-            <div className="flex justify-center items-center w-full">
+            <div className="flex justify-center items-center w-full max-w-md mx-auto">
                 <ReactApexChart
                     options={this.state.options}
                     series={this.state.series}
                     type="bar"
-                    height={350}
+                    height={200}
                     width="100%"
                 />
             </div>
