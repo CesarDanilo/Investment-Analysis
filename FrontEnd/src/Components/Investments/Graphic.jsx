@@ -5,7 +5,7 @@ class ApexChart extends Component {
     constructor(props) {
         super(props);
 
-        const cores = ['#777777', '#F29A2E'];
+        const cores = ['#888', '#f2b632']; // Cores neutras (cinza médio e amarelo queimado)
 
         this.state = {
             series: [
@@ -20,47 +20,52 @@ class ApexChart extends Component {
                 chart: {
                     height: 350,
                     type: 'bar',
-                    events: {
-                        click: function (chart, w, e) {
-                            // Adicionar eventos de clique aqui, se necessário
-                        },
-                    },
+                    toolbar: { show: false },
+                    background: 'transparent'
                 },
                 colors: cores,
                 plotOptions: {
                     bar: {
-                        columnWidth: '85%',
-                        distributed: true,
-                    },
-                },
-                dataLabels: {
-                    enabled: true, // Habilitando os rótulos de dados
-                    formatter: function (val) {
-                        return `R$ ${val}`;
+                        borderRadius: 4,
+                        columnWidth: '50%',
+                        distributed: true
                     }
                 },
-                legend: {
-                    show: false, // Desabilitando a legenda
+                dataLabels: {
+                    enabled: true,
+                    style: {
+                        colors: ['#e0e0e0']
+                    },
+                    formatter: (val) => `R$ ${val}`
                 },
                 xaxis: {
                     categories: ['POUPANÇA', 'TESOURO DIRETO'],
                     labels: {
-                        style: {
-                            colors: cores,
-                            fontSize: '12px',
-                        },
+                        show: false // Remove rótulos do eixo x
                     },
+                    axisBorder: { show: false },
+                    axisTicks: { show: false }
                 },
-            },
+                yaxis: {
+                    show: false // Remove eixo y completamente
+                },
+                grid: {
+                    show: false // Remove linhas de grade
+                },
+                tooltip: {
+                    theme: 'dark'
+                },
+                legend: {
+                    show: false
+                }
+            }
         };
     }
 
-    // Função para formatar valores em R$ com 2 casas decimais
     formatCurrency(value) {
-        return parseFloat(value).toFixed(2); // Formatando com 2 casas decimais
+        return parseFloat(value).toFixed(2);
     }
 
-    // Atualiza os dados do gráfico quando os props de valores calculados mudarem
     componentDidUpdate(prevProps) {
         if (
             prevProps.calculatedValueSavings !== this.props.calculatedValueSavings ||
@@ -73,24 +78,22 @@ class ApexChart extends Component {
                             this.formatCurrency(this.props.calculatedValueSavings),
                             this.formatCurrency(this.props.calculatedValueSavingsTesouroDireto)
                         ]
-                    },
-                ],
+                    }
+                ]
             });
         }
     }
 
     render() {
         return (
-            <div>
-                <div id="chart">
-                    <ReactApexChart
-                        options={this.state.options}
-                        series={this.state.series}
-                        type="bar"
-                        height={350}
-                        width={500}
-                    />
-                </div>
+            <div className="flex justify-center items-center w-full">
+                <ReactApexChart
+                    options={this.state.options}
+                    series={this.state.series}
+                    type="bar"
+                    height={350}
+                    width="100%"
+                />
             </div>
         );
     }
